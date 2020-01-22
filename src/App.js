@@ -1,23 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-const Welcome = (props) => {
-  return (
+class App extends Component{
+  constructor (props){
+    super(props);
+
+    this.state = {
+      count: 0
+    };
+
+    this.increase = this.increase.bind(this);
+    this.decrease = this.decrease.bind(this);
+  }
+
+  increase() {
+    let state = this.state;
+    state.count += 1;
+    this.setState(state);
+  }
+
+  decrease() {
+    let state = this.state;
+    state.count = state.count > 0 ? (state.count -= 1) : state.count;
+    this.setState(state);
+  }
+
+  render(){
+    return (
       <div>
-        <h2>Welcome {props.name}!</h2>
-        <h3>Your balance is {props.balance} </h3>
+        <h1> Contador </h1>
+        <button onClick={this.decrease}>-</button>
+        {this.state.count}
+        <button onClick={this.increase}>+</button>
       </div>
     );
-}
-
-function App() {
-  return (
-    <div>
-      Hey World!
-      <Welcome name='Ítalo Souza' balance = 'E24,00!'/>
-    </div>
-  );
+  }
 }
 
 export default App;
