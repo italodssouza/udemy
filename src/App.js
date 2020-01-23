@@ -5,11 +5,22 @@ class App extends Component{
     super(props);
 
     this.state = {
-      count: 0
+      count: 0,
+      horas: '00:00:00'
     };
 
     this.increase = this.increase.bind(this);
     this.decrease = this.decrease.bind(this);
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({horas: new Date().toLocaleTimeString()})
+    }, 1000)
+  }
+
+  componentDidUpdate() {
+    //When the component is updated
   }
 
   increase() {
@@ -28,6 +39,7 @@ class App extends Component{
     return (
       <div>
         <h1> Contador </h1>
+        <h2>Horas: {this.state.horas}</h2>
         <button onClick={this.decrease}>-</button>
         {this.state.count}
         <button onClick={this.increase}>+</button>
